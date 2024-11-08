@@ -4,6 +4,11 @@ This application is a comprehensive dashboard for viewing detailed information o
 
 The app fetches cryptocurrency data, prices, and historical chart data using the CoinGecko API.
 
+## Class Diagram
+
+![Class Diagram](docs/class_diagram.jpg)
+
+
 ## Features
 - **Crypto Dashboard**: Displays details and statistics for several cryptocurrencies.
 - **Chart Data**: Provides historical chart data for selected cryptocurrencies.
