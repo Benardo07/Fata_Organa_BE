@@ -7,9 +7,10 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table'
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'
-import { CryptoData, formatNumberWithUnits } from '@/app/page'
+import { CryptoData } from '@/app/page'
 import Image from 'next/image'
 import { Skeleton } from '@/components/ui/skeleton'  // Ensure Skeleton component is imported
+import { formatNumberWithUnits } from '@/utils/util'
 
 interface DetailProps {
   params: {
@@ -181,7 +182,7 @@ export default function CryptoDetail({ params }: DetailProps) {
                     <Skeleton className="h-full w-full bg-gray-700 rounded-md" />
                   ) : (
                     <ResponsiveContainer width="100%" height="100%">
-                      <LineChart data={chartData}>
+                      <LineChart data={chartData} margin={{ top: 10, right: 30, left: 20, bottom: 0 }}>
                         <XAxis 
                           dataKey="timestamp" 
                           stroke="#666" 

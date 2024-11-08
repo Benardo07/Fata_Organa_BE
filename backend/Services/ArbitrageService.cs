@@ -11,7 +11,6 @@ namespace CryptoArbitrageAPI.Services
         private readonly ICoinGeckoService _coinGeckoService;
         private readonly ILogger<ArbitrageService> _logger;
 
-        // List of stablecoins to consider
         private readonly List<string> _stableCoins = new List<string> { "usdt", "usdc", "busd", "dai" };
 
         public ArbitrageService(ICoinGeckoService coinGeckoService, ILogger<ArbitrageService> logger)
@@ -37,7 +36,7 @@ namespace CryptoArbitrageAPI.Services
             // Step 2: Fetch USD prices
             var usdPrices = await _coinGeckoService.GetUsdPricesAsync(coinIds);
 
-            // Step 3: Fetch exchange pairs (actual exchange rates between stablecoins and cryptocurrencies)
+            // Step 3: Fetch exchange pairs 
             var exchangePairs = await _coinGeckoService.GetExchangePairsAsync();
 
             // Filter exchange pairs to include only those involving stablecoins
@@ -102,7 +101,7 @@ namespace CryptoArbitrageAPI.Services
                 }
             }
 
-            // Add edges between coins using manually calculated exchange rates
+            
             foreach (var fromCoin in coinIds)
             {
                 foreach (var toCoin in coinIds)

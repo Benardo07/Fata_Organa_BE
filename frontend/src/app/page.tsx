@@ -26,6 +26,7 @@ import { useRouter } from 'next/navigation'
 
 // Import skeleton styling
 import {Skeleton} from '@/components/ui/skeleton'
+import { formatNumberWithUnits, formatPercentage } from '@/utils/util'
 
 export interface CryptoData {
   id: string;
@@ -48,14 +49,8 @@ interface ArbitrageData {
   profitPercentage: number;
 }
 
-export const formatPercentage = (value: number) => value.toFixed(2);
 
-export const formatNumberWithUnits = (value: number) => {
-  if (value >= 1_000_000_000) return `${(value / 1_000_000_000).toFixed(2)}B`;
-  if (value >= 1_000_000) return `${(value / 1_000_000).toFixed(2)}M`;
-  if (value >= 1_000) return `${(value / 1_000).toFixed(2)}K`;
-  return value.toFixed(2);
-};
+
 
 export default function Dashboard() {
   const [cryptoData, setCryptoData] = useState<CryptoData[]>([])

@@ -27,7 +27,6 @@ namespace CryptoArbitrageAPI.Controllers
             }
             catch (Exception ex)
             {
-                // Log the exception if you want detailed logging here
                 return StatusCode(500, "An error occurred while fetching cryptocurrencies.");
             }
         }

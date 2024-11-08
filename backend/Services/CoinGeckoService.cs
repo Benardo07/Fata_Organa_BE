@@ -2,13 +2,13 @@
 
 using CryptoArbitrageAPI.Models;
 using System.Text.Json;
-using Microsoft.Extensions.Logging; // Ensure you have this namespace for logging
+using Microsoft.Extensions.Logging;
 namespace CryptoArbitrageAPI.Services
 {
     public class CoinGeckoService : ICoinGeckoService
     {
         private readonly HttpClient _httpClient;
-        private readonly ILogger<CoinGeckoService> _logger; // Add ILogger
+        private readonly ILogger<CoinGeckoService> _logger; 
 
         public CoinGeckoService(HttpClient httpClient,ILogger<CoinGeckoService> logger)
         {
@@ -56,7 +56,6 @@ namespace CryptoArbitrageAPI.Services
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
-            _logger.LogInformation("Response Content: {Content}", content);
 
             var options = new JsonSerializerOptions
             {
@@ -116,9 +115,7 @@ namespace CryptoArbitrageAPI.Services
                 _logger.LogError("Failed to deserialize exchange pairs.");
                 return new List<ExchangePair>();
             }
-
-            var tickersJson = JsonSerializer.Serialize(data.Tickers, options);
-            _logger.LogInformation("Tickers Data: {TickersJson}", tickersJson);
+            
             return data.Tickers;
         }
 
@@ -129,7 +126,6 @@ namespace CryptoArbitrageAPI.Services
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
-            _logger.LogInformation("Coin Detail Response Content: {Content}", content);
 
             var options = new JsonSerializerOptions
             {
@@ -137,7 +133,7 @@ namespace CryptoArbitrageAPI.Services
             };
 
             var coinDetails = JsonSerializer.Deserialize<List<Cryptocurrency>>(content, options);
-            return coinDetails?.FirstOrDefault(); // Return the first item if the list is not empty
+            return coinDetails?.FirstOrDefault();
         }
 
         public async Task<List<PriceDataPoint>> GetChartDataAsync(string coinId, string interval)
@@ -173,7 +169,6 @@ namespace CryptoArbitrageAPI.Services
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
-            _logger.LogInformation("Chart Data Response Content: {Content}", content);
 
             var options = new JsonSerializerOptions
             {
